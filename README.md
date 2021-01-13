@@ -1,4 +1,4 @@
-![IMG_20210112_222104](https://user-images.githubusercontent.com/72228497/104394146-bfcd0480-5524-11eb-8ba0-f07d6b82a5fc.png)
+![IMG_20210112_223639](https://user-images.githubusercontent.com/72228497/104395180-e9872b00-5526-11eb-86b2-4d04978b6ae1.png)
 # WebCam Java com OpenCV
 ### Um projeto feito com JFrame e JPanel.
 ### Linguagem de programaçao usada: ![Java](https://img.shields.io/badge/-Java-%23FF0000?style=flat-square&logo=Java&logoColor=ffffff)
