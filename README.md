@@ -5,7 +5,7 @@
 ### O programa tem como objetivo, mostrar a WebCam do usuário após a execução.
 
 ### Objetivo:
-- [ ] Detectar um ser vivo.
+- [x] Detectar um ser vivo.
 
 #### Passo a passo:
 - 1️⃣ Baixe o OpenCV: https://opencv.org/releases/
