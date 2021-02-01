@@ -1,7 +1,7 @@
-![IMG_20210112_223639](https://user-images.githubusercontent.com/72228497/104395180-e9872b00-5526-11eb-86b2-4d04978b6ae1.png)
 # WebCam Java com OpenCV
-### Um projeto feito com JFrame e JPanel.
+### Um projeto feito com JFrame(SWING).
 ### Linguagem de programaçao usada: ![Java](https://img.shields.io/badge/-Java-%23FF0000?style=flat-square&logo=Java&logoColor=ffffff)
+### Biblioteca usada: ![OpenCV](https://img.shields.io/badge/-OpenCV-%224169E1?style=flat-square&logo=OpenCV&logoColor=ffffff)
 ### O programa tem como objetivo, mostrar a WebCam do usuário após a execução.
 
 ### Objetivo:
