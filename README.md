@@ -6,6 +6,7 @@
 
 ### Objetivo:
 - [x] Detectar um ser vivo.
+- [x] Detectar imagens inseridas pelo usuário(jpg, png)
 
 #### Passo a passo:
 - 1️⃣ Baixe o OpenCV: https://opencv.org/releases/
