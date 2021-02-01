@@ -1,6 +1,5 @@
 package webcam;
 
-
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -19,10 +18,12 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.videoio.VideoCapture;
 import java.awt.Toolkit;
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class FormCAM extends javax.swing.JFrame {
     
@@ -47,7 +48,7 @@ public class FormCAM extends javax.swing.JFrame {
                                 Graphics g = jPanel1.getGraphics();
                                 faceDetector.detectMultiScale(frame, faceDetections);
                                 for (Rect rect : faceDetections.toArray()) {
-                                    Imgproc.rectangle(frame, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255,0));
+                                    Imgproc.rectangle(frame, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255,0),3);
                                 }
                                 Imgcodecs.imencode(".bmp", frame, frameB);
                                 Image im = ImageIO.read(new ByteArrayInputStream(frameB.toArray()));
@@ -72,6 +73,7 @@ public class FormCAM extends javax.swing.JFrame {
     public FormCAM() {
         initComponents();
         System.out.println(FormCAM.class.getResource("haarcascade_frontalface_alt.xml").getPath().substring(1));
+        System.out.println(FormCAM.class.getResource("lbpcascade_frontalface.xml").getPath().substring(1));
         setIcon();
         
     }
@@ -83,6 +85,7 @@ public class FormCAM extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WebCamJava");
@@ -116,6 +119,13 @@ public class FormCAM extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Imagem");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -124,13 +134,16 @@ public class FormCAM extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 447, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addGap(0, 365, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -173,8 +186,47 @@ public class FormCAM extends javax.swing.JFrame {
         video.release();  // stop caturing fron cam
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        JFileChooser arquivo = new JFileChooser();
+        arquivo.setDialogTitle("Selecionar imagem para detecção");
+        arquivo.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imagem","jpg","png");
+        
+        arquivo.setFileFilter(filtro);
+        int retorno = arquivo.showOpenDialog(this);
+        
+        if (retorno == JFileChooser.APPROVE_OPTION) {
+            File file = arquivo.getSelectedFile();
+            String imgArquivo = file.getPath();
+            
+            Mat src = Imgcodecs.imread(imgArquivo);
+                
+            CascadeClassifier cc = new CascadeClassifier(FormCAM.class.getResource("lbpcascade_frontalface.xml").getPath().substring(1));
+            
+            MatOfRect faceDetection = new MatOfRect();
+            cc.detectMultiScale(src, faceDetection);
+            Detectado detectado = new Detectado();
+            detectado.numeroDec.setText(String.format("Faces detectadas: %d", faceDetection.toArray().length));
+            detectado.setVisible(true);
+            
+            for (Rect rect : faceDetection.toArray()) {
+                Imgproc.rectangle(src, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255,0),3);
+            }
+            if (!imgArquivo.equals(imgArquivo.replaceAll(".jpg", ".png"))) {
+                Imgcodecs.imwrite(imgArquivo.replaceAll(".jpg", "output")+".jpg", src);
+            }  
+            if (!imgArquivo.equals(imgArquivo.replaceAll(".png", ".jpg"))) {
+                Imgcodecs.imwrite(imgArquivo.replaceAll(".png", "output")+".png", src);
+            }
+            detectado.local.setText(String.format("Localizado em: "+imgArquivo));
+       }
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
     public static void main(String args[]) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        
         
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -211,6 +263,7 @@ public class FormCAM extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JButton jButton1;
     protected javax.swing.JButton jButton2;
+    protected javax.swing.JButton jButton3;
     protected javax.swing.JPanel jPanel1;
     protected javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
