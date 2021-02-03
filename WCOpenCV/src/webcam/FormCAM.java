@@ -19,9 +19,9 @@ import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.videoio.VideoCapture;
 import java.awt.Toolkit;
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -45,7 +45,7 @@ public class FormCAM extends javax.swing.JFrame {
                         if (video.grab()) {
                             try {
                                 video.retrieve(frame);
-                                Graphics g = jPanel1.getGraphics();
+                                Graphics g = painel1.getGraphics();
                                 faceDetector.detectMultiScale(frame, faceDetections);
                                 for (Rect rect : faceDetections.toArray()) {
                                     Imgproc.rectangle(frame, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255,0),3);
@@ -81,84 +81,84 @@ public class FormCAM extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        painel1 = new javax.swing.JPanel();
+        painel2 = new javax.swing.JPanel();
+        Btn1 = new javax.swing.JButton();
+        btn2 = new javax.swing.JButton();
+        btn3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WebCamJava");
         setResizable(false);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout painel1Layout = new javax.swing.GroupLayout(painel1);
+        painel1.setLayout(painel1Layout);
+        painel1Layout.setHorizontalGroup(
+            painel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        painel1Layout.setVerticalGroup(
+            painel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 481, Short.MAX_VALUE)
         );
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
+        painel2.setBackground(new java.awt.Color(153, 153, 153));
 
-        jButton1.setText("Iniciar");
-        jButton1.setFocusPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Btn1.setText("Iniciar");
+        Btn1.setFocusPainted(false);
+        Btn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Btn1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Parar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn2.setText("Parar");
+        btn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Imagem");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btn3.setText("Imagem");
+        btn3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btn3ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout painel2Layout = new javax.swing.GroupLayout(painel2);
+        painel2.setLayout(painel2Layout);
+        painel2Layout.setHorizontalGroup(
+            painel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painel2Layout.createSequentialGroup()
+                .addComponent(Btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(btn3)
                 .addGap(0, 365, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        painel2Layout.setVerticalGroup(
+            painel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(Btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, Short.MAX_VALUE)
+                .addComponent(btn2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+            .addComponent(btn3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(painel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(painel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(painel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(painel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
@@ -166,28 +166,28 @@ public class FormCAM extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn1ActionPerformed
         video = new VideoCapture(0); // video capture from default cam
         myThread = new DaemonThread(); //create object of threat class
         Thread t = new Thread(myThread);
         t.setDaemon(true);
         myThread.runnable = true;
         t.start();                 //start thrad
-        jButton1.setEnabled(false);  // deactivate start button
-        jButton2.setEnabled(true);  //  activate stop button
+        Btn1.setEnabled(false);  // deactivate start button
+        btn2.setEnabled(true);  //  activate stop button
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_Btn1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
         myThread.runnable = false;            // stop thread
-        jButton1.setEnabled(true);  // deactivate start button
-        jButton2.setEnabled(false);    // deactivate stop button
+        Btn1.setEnabled(true);  // deactivate start button
+        btn2.setEnabled(false);    // deactivate stop button
 
         video.release();  // stop caturing fron cam
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
         JFileChooser arquivo = new JFileChooser();
         arquivo.setDialogTitle("Selecionar imagem para detecção");
         arquivo.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -223,10 +223,23 @@ public class FormCAM extends javax.swing.JFrame {
             detectado.local.setText(String.format("Localizado em: "+imgArquivo));
        }
         
-    }//GEN-LAST:event_jButton3ActionPerformed
-    public static void main(String args[]) {
+    }//GEN-LAST:event_btn3ActionPerformed
+    public static void main(String args[]) throws Exception {
+        // get the model
+        String model = System.getProperty("sun.arch.data.model");
+        // the path the .dll lib location
+        String libraryPath = "C:/WCOpenCV/dist/lib/x86/";
+        // check for if system is 64 or 32
+        if(model.equals("64")) {
+            libraryPath = "C:/WCOpenCV/dist/lib/x64/";
+        }
+        // set the path
+        System.setProperty("java.library.path", libraryPath);
+        Field sysPath = ClassLoader.class.getDeclaredField("sys_paths");
+        sysPath.setAccessible(true);
+        sysPath.set(null, null);
+        // load the lib
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        
         
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -252,24 +265,21 @@ public class FormCAM extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new FormCAM().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new FormCAM().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton jButton1;
-    protected javax.swing.JButton jButton2;
-    protected javax.swing.JButton jButton3;
-    protected javax.swing.JPanel jPanel1;
-    protected javax.swing.JPanel jPanel2;
+    protected javax.swing.JButton Btn1;
+    protected javax.swing.JButton btn2;
+    protected javax.swing.JButton btn3;
+    protected javax.swing.JPanel painel1;
+    protected javax.swing.JPanel painel2;
     // End of variables declaration//GEN-END:variables
 
     private void setIcon() {
-            setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("favicon.png")));
+            setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("favicon.ico")));
         }
 }
 
