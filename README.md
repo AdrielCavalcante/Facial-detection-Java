@@ -13,8 +13,8 @@
 
 - 2️⃣ Baixe a JDK 8: https://www.oracle.com/br/java/technologies/javase/javase-jdk8-downloads.html
 
-- 3️⃣ Adicione a Biblioteca no Projeto, ela fica na pasta: opencv/build/java e o .jar
+- 3️⃣ Adicione a Biblioteca no Projeto, coloque a pasta opencv junto das outras(src,dist e etc).
 
-- 4️⃣ Verifique a versão do seu sistema(x64/x86) e adicione o caminho até a pasta opencv\build\java\x64 e adicione nas propriedades do projeto, em **Executar**, Opções de VM, coloque: -Djava.library.path="caminho até a pasta já citada", clique em OK.
+- 4️⃣ Abra a sua IDE e executa o arquivo: **WCOpenCV.jar** não se esqueça do caminho.
 
-- 5️⃣ Abrir a sua IDE ou CMD e execute o arquivo: Dist/WCOpenCV.jar
+##### OBS: Pelo CMD, você tambem consiguirá, mas parece que a biblioteca não está carregando.
