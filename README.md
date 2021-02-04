@@ -5,7 +5,7 @@
 ### O programa tem como objetivo, mostrar a WebCam do usuário após a execução.
 
 ### Objetivo:
-- [x] Detectar um ser vivo.
+- [x] Detectar um ser vivo pela câmera frontal.
 - [x] Detectar imagens inseridas pelo usuário(jpg, png)
 
 #### Passo a passo:
@@ -15,6 +15,5 @@
 
 - 3️⃣ Adicione a Biblioteca no Projeto, coloque a pasta opencv junto das outras(src,dist e etc).
 
-- 4️⃣ Abra a sua IDE e executa o arquivo: **WCOpenCV.jar** não se esqueça do caminho.
+- 4️⃣ Para executar o programa fora de IDE e etc, apenas cliclando no .jar, baixe o dist.zip e jogue no C: e execute o WCOpenCV.jar
 
-##### OBS: Pelo CMD, você tambem consiguirá, mas parece que a biblioteca não está carregando.
