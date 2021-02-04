@@ -33,7 +33,7 @@ public class FormCAM extends javax.swing.JFrame {
     MatOfByte frameB = new MatOfByte();
     MatOfRect faceDetections = new MatOfRect();
     CascadeClassifier faceDetector = new CascadeClassifier(FormCAM.class.getResource("haarcascade_frontalface_alt.xml").getPath().substring(1));
-    
+
     class DaemonThread implements Runnable {
         
     volatile boolean runnable = false;
@@ -44,6 +44,7 @@ public class FormCAM extends javax.swing.JFrame {
                     while (runnable) {
                         if (video.grab()) {
                             try {
+                                faceDetector.load("C:/dist/lib/haarcascade_frontalface_alt.xml");
                                 video.retrieve(frame);
                                 Graphics g = painel1.getGraphics();
                                 faceDetector.detectMultiScale(frame, faceDetections);
@@ -204,7 +205,7 @@ public class FormCAM extends javax.swing.JFrame {
             Mat src = Imgcodecs.imread(imgArquivo);
                 
             CascadeClassifier cc = new CascadeClassifier(FormCAM.class.getResource("lbpcascade_frontalface.xml").getPath().substring(1));
-            
+            cc.load("C:/dist/lib/xmllbpcascade_frontalface.xml");
             MatOfRect faceDetection = new MatOfRect();
             cc.detectMultiScale(src, faceDetection);
             Detectado detectado = new Detectado();
@@ -228,10 +229,10 @@ public class FormCAM extends javax.swing.JFrame {
         // get the model
         String model = System.getProperty("sun.arch.data.model");
         // the path the .dll lib location
-        String libraryPath = "C:/WCOpenCV/dist/lib/x86/";
+        String libraryPath = "C:/dist/lib/x86";
         // check for if system is 64 or 32
         if(model.equals("64")) {
-            libraryPath = "C:/WCOpenCV/dist/lib/x64/";
+            libraryPath = "C:/dist/lib/x64";
         }
         // set the path
         System.setProperty("java.library.path", libraryPath);
