@@ -26,7 +26,7 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class FormCAM extends javax.swing.JFrame {
-    
+    // Variavéis
     private DaemonThread myThread = null;
     VideoCapture video = null;
     Mat frame = new Mat();
@@ -48,7 +48,7 @@ public class FormCAM extends javax.swing.JFrame {
                                 video.retrieve(frame);
                                 Graphics g = painel1.getGraphics();
                                 faceDetector.detectMultiScale(frame, faceDetections);
-                                for (Rect rect : faceDetections.toArray()) {
+                                for (Rect rect : faceDetections.toArray()) { // Repetição de imagens
                                     Imgproc.rectangle(frame, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255,0),3);
                                 }
                                 Imgcodecs.imencode(".bmp", frame, frameB);
@@ -87,6 +87,7 @@ public class FormCAM extends javax.swing.JFrame {
         Btn1 = new javax.swing.JButton();
         btn2 = new javax.swing.JButton();
         btn3 = new javax.swing.JButton();
+        btn4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WebCamJava");
@@ -127,6 +128,13 @@ public class FormCAM extends javax.swing.JFrame {
             }
         });
 
+        btn4.setText("Sobre");
+        btn4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painel2Layout = new javax.swing.GroupLayout(painel2);
         painel2.setLayout(painel2Layout);
         painel2Layout.setHorizontalGroup(
@@ -137,14 +145,19 @@ public class FormCAM extends javax.swing.JFrame {
                 .addComponent(btn2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn3)
-                .addGap(0, 365, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 282, Short.MAX_VALUE))
         );
         painel2Layout.setVerticalGroup(
             painel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painel2Layout.createSequentialGroup()
+                .addComponent(Btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(painel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(Btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, Short.MAX_VALUE)
-                .addComponent(btn2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-            .addComponent(btn3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(btn3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(btn2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(btn4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -168,46 +181,47 @@ public class FormCAM extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn1ActionPerformed
-        video = new VideoCapture(0); // video capture from default cam
-        myThread = new DaemonThread(); //create object of threat class
+        video = new VideoCapture(0); // 0 captura a câmera padrão do dispositivo
+        myThread = new DaemonThread(); // Instancia o objeto da classe Thread
         Thread t = new Thread(myThread);
         t.setDaemon(true);
         myThread.runnable = true;
-        t.start();                 //start thrad
-        Btn1.setEnabled(false);  // deactivate start button
-        btn2.setEnabled(true);  //  activate stop button
+        t.start();                 // Inicia a Thread
+        Btn1.setEnabled(false);  // Desativa o botão de ligar
+        btn2.setEnabled(true);  //  Ativa o botão de parar
 
     }//GEN-LAST:event_Btn1ActionPerformed
 
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
-        myThread.runnable = false;            // stop thread
-        Btn1.setEnabled(true);  // deactivate start button
-        btn2.setEnabled(false);    // deactivate stop button
-
-        video.release();  // stop caturing fron cam
+        myThread.runnable = false;  // Para a Thread
+        Btn1.setEnabled(true);  // Ativa o botão de ligar
+        btn2.setEnabled(false);    // Desativa o botão de para
+        
+        video.release();  // Para a captura da câmera
 
     }//GEN-LAST:event_btn2ActionPerformed
 
     private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
-        JFileChooser arquivo = new JFileChooser();
+        JFileChooser arquivo = new JFileChooser();  // Seletor de arquivos
         arquivo.setDialogTitle("Selecionar imagem para detecção");
-        arquivo.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imagem","jpg","png");
+        arquivo.setFileSelectionMode(JFileChooser.FILES_ONLY); 
+        // Definindo apenas imagens jpg e png para estarem disponíveis
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("jpg","png"); 
         
         arquivo.setFileFilter(filtro);
         int retorno = arquivo.showOpenDialog(this);
-        
+        // Se o usuário pressionar em selecionar
         if (retorno == JFileChooser.APPROVE_OPTION) {
             File file = arquivo.getSelectedFile();
             String imgArquivo = file.getPath();
             
             Mat src = Imgcodecs.imread(imgArquivo);
-                
+            // Carregando o xml da biblioteca no projeto    
             CascadeClassifier cc = new CascadeClassifier(FormCAM.class.getResource("lbpcascade_frontalface.xml").getPath().substring(1));
             cc.load("C:/dist/lib/xmllbpcascade_frontalface.xml");
             MatOfRect faceDetection = new MatOfRect();
             cc.detectMultiScale(src, faceDetection);
+            // Classe jFrame para mostrar quantas pessoas foram detectadas e o caminho para a imagem
             Detectado detectado = new Detectado();
             detectado.numeroDec.setText(String.format("Faces detectadas: %d", faceDetection.toArray().length));
             detectado.setVisible(true);
@@ -215,9 +229,11 @@ public class FormCAM extends javax.swing.JFrame {
             for (Rect rect : faceDetection.toArray()) {
                 Imgproc.rectangle(src, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255,0),3);
             }
+            // Se o caminho da imagem for diferente, repondo .jpg por .png, substitua .jpg por output.jpg
             if (!imgArquivo.equals(imgArquivo.replaceAll(".jpg", ".png"))) {
                 Imgcodecs.imwrite(imgArquivo.replaceAll(".jpg", "output")+".jpg", src);
-            }  
+            }
+            // Se o caminho da imagem for diferente, repondo .png por .jpg, substitua .png por output.png
             if (!imgArquivo.equals(imgArquivo.replaceAll(".png", ".jpg"))) {
                 Imgcodecs.imwrite(imgArquivo.replaceAll(".png", "output")+".png", src);
             }
@@ -225,21 +241,26 @@ public class FormCAM extends javax.swing.JFrame {
        }
         
     }//GEN-LAST:event_btn3ActionPerformed
+
+    private void btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4ActionPerformed
+        Sobre sobre = new Sobre();
+        sobre.setVisible(true);
+    }//GEN-LAST:event_btn4ActionPerformed
     public static void main(String args[]) throws Exception {
-        // get the model
+        // Pega o modelo
         String model = System.getProperty("sun.arch.data.model");
-        // the path the .dll lib location
+        // Caminho da DLL da biblioteca
         String libraryPath = "C:/dist/lib/x86";
-        // check for if system is 64 or 32
+        // Verifica se o sistema é 32 ou 64 bits
         if(model.equals("64")) {
             libraryPath = "C:/dist/lib/x64";
         }
-        // set the path
+        // Define o caminho
         System.setProperty("java.library.path", libraryPath);
         Field sysPath = ClassLoader.class.getDeclaredField("sys_paths");
         sysPath.setAccessible(true);
         sysPath.set(null, null);
-        // load the lib
+        // Carrega a biblioteca
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         
         /* Set the Nimbus look and feel */
@@ -264,8 +285,6 @@ public class FormCAM extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FormCAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new FormCAM().setVisible(true);
         });
@@ -275,10 +294,12 @@ public class FormCAM extends javax.swing.JFrame {
     protected javax.swing.JButton Btn1;
     protected javax.swing.JButton btn2;
     protected javax.swing.JButton btn3;
+    protected javax.swing.JButton btn4;
     protected javax.swing.JPanel painel1;
     protected javax.swing.JPanel painel2;
     // End of variables declaration//GEN-END:variables
-
+    
+    // Icone do projeto
     private void setIcon() {
             setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("favicon.ico")));
         }
