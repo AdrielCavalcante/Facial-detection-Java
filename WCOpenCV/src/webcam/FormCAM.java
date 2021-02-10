@@ -206,7 +206,7 @@ public class FormCAM extends javax.swing.JFrame {
         arquivo.setDialogTitle("Selecionar imagem para detecção");
         arquivo.setFileSelectionMode(JFileChooser.FILES_ONLY); 
         // Definindo apenas imagens jpg e png para estarem disponíveis
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("jpg","png"); 
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("image","jpg","png"); 
         
         arquivo.setFileFilter(filtro);
         int retorno = arquivo.showOpenDialog(this);
@@ -218,7 +218,7 @@ public class FormCAM extends javax.swing.JFrame {
             Mat src = Imgcodecs.imread(imgArquivo);
             // Carregando o xml da biblioteca no projeto    
             CascadeClassifier cc = new CascadeClassifier(FormCAM.class.getResource("lbpcascade_frontalface.xml").getPath().substring(1));
-            cc.load("C:/dist/lib/xmllbpcascade_frontalface.xml");
+            cc.load("C:/dist/lib/lbpcascade_frontalface.xml");
             MatOfRect faceDetection = new MatOfRect();
             cc.detectMultiScale(src, faceDetection);
             // Classe jFrame para mostrar quantas pessoas foram detectadas e o caminho para a imagem
