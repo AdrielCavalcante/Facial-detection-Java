@@ -24,6 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.opencv.core.Size;
 
 public class FormCAM extends javax.swing.JFrame {
     // Variavéis
@@ -47,8 +48,8 @@ public class FormCAM extends javax.swing.JFrame {
                                 faceDetector.load("C:/dist/lib/haarcascade_frontalface_alt.xml");
                                 video.retrieve(frame);
                                 Graphics g = painel1.getGraphics();
-                                faceDetector.detectMultiScale(frame, faceDetections);
-                                for (Rect rect : faceDetections.toArray()) { // Repetição de imagens
+                                faceDetector.detectMultiScale(frame, faceDetections, 1.3, 3, 0, new Size(30,30));
+                                for (Rect rect : faceDetections.toArray()) { // Repetição de de quadrados
                                     Imgproc.rectangle(frame, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255,0),3);
                                 }
                                 Imgcodecs.imencode(".bmp", frame, frameB);
@@ -220,7 +221,7 @@ public class FormCAM extends javax.swing.JFrame {
             CascadeClassifier cc = new CascadeClassifier(FormCAM.class.getResource("lbpcascade_frontalface.xml").getPath().substring(1));
             cc.load("C:/dist/lib/lbpcascade_frontalface.xml");
             MatOfRect faceDetection = new MatOfRect();
-            cc.detectMultiScale(src, faceDetection);
+            cc.detectMultiScale(src, faceDetection, 1.1, 3, 0, new Size(30,30));
             // Classe jFrame para mostrar quantas pessoas foram detectadas e o caminho para a imagem
             Detectado detectado = new Detectado();
             detectado.numeroDec.setText(String.format("Faces detectadas: %d", faceDetection.toArray().length));
