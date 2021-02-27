@@ -17,3 +17,4 @@
 
 - 4️⃣ Para executar o programa fora de IDE e etc, apenas cliclando no .jar, baixe o dist.zip e jogue no C: e execute o WCOpenCV.jar
 
+#### Vídeo mostrando a execução: https://youtu.be/zERrGObfTJM
