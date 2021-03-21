@@ -1,4 +1,5 @@
-# WebCam Java com OpenCV
+<h1 align="center"> WebCam Java com OpenCV </h1>
+
 ### Um projeto feito com JFrame(SWING).
 ### Linguagem de programaçao usada: ![Java](https://img.shields.io/badge/-Java-%23FF0000?style=flat-square&logo=Java&logoColor=ffffff)
 ### Biblioteca usada: ![OpenCV](https://img.shields.io/badge/-OpenCV-%224169E1?style=flat-square&logo=OpenCV&logoColor=ffffff)
