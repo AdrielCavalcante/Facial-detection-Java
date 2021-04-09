@@ -6,8 +6,8 @@
 ### O programa tem como objetivo, mostrar a WebCam do usuário após a execução.
 
 ### Objetivo:
-- [x] Detectar um ser vivo pela câmera frontal.
-- [x] Detectar imagens inseridas pelo usuário(jpg, png)
+- [ ] Detectar um ser vivo pela câmera frontal.
+- [ ] Detectar imagens inseridas pelo usuário(jpg, png)
 
 #### Passo a passo:
 - 1️⃣ Baixe o OpenCV: https://opencv.org/releases/
